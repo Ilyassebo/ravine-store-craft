@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ravine Store Craft - متجر المودات الفخم</title>
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --card-bg: #141414;
+            --gold-primary: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #997a15;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-banner {
+            background: linear-gradient(90deg, #1a1a1a, #26210f, #1a1a1a);
+            border-bottom: 2px solid var(--gold-primary);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .app-banner span {
+            color: var(--gold-light);
+            font-weight: bold;
+        }
+
+        .btn-download-app {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #000;
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn-download-app:hover {
+            background: var(--gold-light);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        header {
+            background: radial-gradient(circle, #1f1a0a 0%, #0f0f0f 100%);
+            border-bottom: 3px solid var(--gold-primary);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--gold-primary);
+            font-size: 2.8rem;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            letter-spacing: 1px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            margin: 10px 0 0;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .admin-panel {
+            background: var(--card-bg);
+            border: 2px dashed var(--gold-primary);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+
+        .admin-panel h2 {
+            color: var(--gold-primary);
+            margin-top: 0;
+            font-size: 1.5rem;
+            border-bottom: 1px solid #222;
+            padding-bottom: 10px;
+        }
+
+        .admin-form-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .admin-input {
+            background: #1c1c1c;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .admin-input:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-add {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #000;
+            border: none;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .btn-add:hover {
+            background: var(--gold-light);
+        }
+
+        .section-title {
+            color: var(--gold-primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--gold-primary);
+            padding-right: 10px;
+        }
+
+        .mods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .mod-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+            border: 1px solid #262626;
+            transition: transform 0.3s ease, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mod-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--gold-primary);
+        }
+
+        .mod-media {
+            width: 100%;
+            height: 190px;
+            background-color: #1a1a1a;
+            object-fit: cover;
+        }
+
+        .mod-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .mod-title {
+            font-size: 1.4rem;
+            margin: 0 0 10px;
+            color: var(--gold-light);
+        }
+
+        .mod-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .mod-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #222;
+            padding-top: 15px;
+            margin-top: auto;
+        }
+
+        .mod-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--gold-primary);
+        }
+
+        .btn-buy {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #000;
+            padding: 8px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-buy:hover {
+            background: var(--gold-light);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #0d0d0d;
+            color: var(--text-secondary);
+            margin-top: 60px;
+            border-top: 1px solid #222;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-banner">
+        <span>👑 حمل تطبيق "Ravine Store Craft" الرسمي لهاتفك الآن واستمتع بتجربة أسرع!</span>
+        <a href="#" class="btn-download-app">نزل التطبيق (APK)</a>
+    </div>
+
+    <header>
+        <h1>Ravine Store Craft</h1>
+        <p>متجر المودات الفخم - إضافات ماين كرافت أسطورية بثمن رمزي لجميع أنحاء العالم</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="admin-panel">
+            <h2>لوحة التحكم الخاصة (إدارة المنتجات)</h2>
+            <div class="admin-form-group">
+                <input type="text" id="newTitle" class="admin-input" placeholder="اسم المود الجديد">
+                <input type="text" id="newPrice" class="admin-input" placeholder="السعر (مثلاً: $1.00)">
+                <input type="text" id="newImg" class="admin-input" placeholder="رابط صورة المود أو الفيديو">
+                <input type="text" id="newLink" class="admin-input" placeholder="رابط التحميل / Gumroad">
+            </div>
+            <textarea id="newDesc" class="admin-input" placeholder="وصف المود بالتفصيل..." style="width: 100%; margin-top: 15px; height: 60px; resize: none;"></textarea>
+            <button class="btn-add" onclick="addNewMod()">إضافة المود للمتجر</button>
+        </div>
+
+        <h2 class="section-title">المودات المتاحة</h2>
+        
+        <div class="mods-grid" id="modsContainer">
+            
+            <div class="mod-card">
+                <img src="https://via.placeholder.com/300x190/1a1a1a/d4af37?text=Minecraft+Mod" alt="صورة المود" class="mod-media">
+                <div class="mod-content">
+                    <h3 class="mod-title">مود الأسلحة الملكية</h3>
+                    <p class="mod-desc">أضف أسلحة ذهبية وسيوف خارقة بتأثيرات بصرية حماسية ومميزة جداً.</p>
+                    <div class="mod-footer">
+                        <span class="mod-price">$1.00</span>
+                        <a href="#" class="btn-buy">شراء / تحميل</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mod-card">
+                <img src="https://via.placeholder.com/300x190/1a1a1a/d4af37?text=Minecraft+Mod" alt="صورة المود" class="mod-media">
+                <div class="mod-content">
+                    <h3 class="mod-title">مود القلعة المظلمة</h3>
+                    <p class="mod-desc">اكتشف لڤلات ومتاهات عميقة ومخيفة مع زعماء جدد وجوائز قيمة.</p>
+                    <div class="mod-footer">
+                        <span class="mod-price">$1.00</span>
+                        <a href="#" class="btn-buy">شراء / تحميل</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2026 Ravine Store Craft</p>
+    </footer>
+
+    <script>
+        function addNewMod() {
+            const title = document.getElementById('newTitle').value;
+            const price = document.getElementById('newPrice').value;
+            const img = document.getElementById('newImg').value;
+            const link = document.getElementById('newLink').value;
+            const desc = document.getElementById('newDesc').value;
+
+            if(!title || !price) {
+                alert('المرجو إدخال اسم المود والسعر على الأقل!');
+                return;
+            }
+
+            const container = document.getElementById('modsContainer');
+            
+            const card = document.createElement('div');
+            card.className = 'mod-card';
+            card.innerHTML = `
+                <img src="${img || 'https://via.placeholder.com/300x190/1a1a1a/d4af37?text=Mod'}" alt="صورة المود" class="mod-media">
+                <div class="mod-content">
+                    <h3 class="mod-title">${title}</h3>
+                    <p class="mod-desc">${desc || 'لا يوجد وصف مضاف.'}</p>
+                    <div class="mod-footer">
+                        <span class="mod-price">${price}</span>
+                        <a href="${link || '#'}" class="btn-buy">شراء / تحميل</a>
+                    </div>
+                </div>
+            `;
+
+            container.prepend(card);
+
+            document.getElementById('newTitle').value = '';
+            document.getElementById('newPrice').value = '';
+            document.getElementById('newImg').value = '';
+            document.getElementById('newLink').value = '';
+            document.getElementById('newDesc').value = '';
+        }
+    </script>
+
+</body>
+</html>
