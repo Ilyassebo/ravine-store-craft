@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ravine Store Craft - متجر مودات ماين كرافت</title>
+    <style>
+        :root {
+            --bg-color: #0b0b0e;
+            --card-bg: #15151a;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --text-color: #ffffff;
+            --text-muted: #a0a0a5;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding-bottom: 50px;
+        }
+        header {
+            background: linear-gradient(135deg, #111116, #1c1c24);
+            border-bottom: 2px solid var(--gold);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+        }
+        header h1 {
+            color: var(--gold);
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
+        header p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        .admin-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--gold);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+        .admin-panel h2 {
+            color: var(--gold);
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        .admin-panel input, .admin-panel textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #202028;
+            border: 1px solid #33333d;
+            color: white;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .admin-panel input:focus, .admin-panel textarea:focus {
+            border-color: var(--gold);
+            outline: none;
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), #aa8c2c);
+            color: #0b0b0e;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+        .btn-gold:hover {
+            opacity: 0.9;
+            box-shadow: 0 0 10px var(--gold);
+        }
+        .mods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .mod-card {
+            background: var(--card-bg);
+            border: 1px solid #2b2b36;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .mod-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+        .mod-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        .mod-content {
+            padding: 15px;
+        }
+        .mod-title {
+            color: var(--gold-light);
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        .mod-desc {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .mod-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mod-price {
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .btn-download {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 6px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+        .btn-download:hover {
+            background: var(--gold);
+            color: #0b0b0e;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--text-muted);
+            font-size: 12px;
+            border-top: 1px solid #1c1c24;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Ravine Store Craft</h1>
+        <p>المتجر الأسطوري لمودات ماين كرافت الفاخرة</p>
+    </header>
+
+    <div class="container">
+        <!-- لوحة التحكم لإضافة المودات -->
+        <div class="admin-panel">
+            <h2>لوحة التحكم - إضافة مود جديد</h2>
+            <input type="text" id="modTitle" placeholder="اسم المود (مثال: Dragon Fire Mod)">
+            <input type="text" id="modPrice" placeholder="السعر (مثال: مجاناً أو 5$ vald)">
+            <input type="text" id="modImg" placeholder="رابط صورة المود (صورة مصغرة)">
+            <input type="text" id="modLink" placeholder="رابط التحميل (Mediafire أو Google Drive)">
+            <textarea id="modDesc" rows="2" placeholder="وصف قصير للمود..."></textarea>
+            <button class="btn-gold" onclick="addNewMod()">نشر المود في المتجر</button>
+        </div>
+
+        <!-- قائمة المودات -->
+        <div class="mods-grid" id="modsContainer">
+            <!-- مود تجريبي افتراضي -->
+            <div class="mod-card">
+                <img src="https://images.unsplash.com/photo-1627856013091-feddeac5b425?w=500&auto=format&fit=crop&q=60" alt="Mod">
+                <div class="mod-content">
+                    <h3 class="mod-title">Gold Shaders Ultra</h3>
+                    <p class="mod-desc">أقوى شيدر مظلم بتأثيرات ذهبية مذهلة تناسب الهواتف والحواسيب.</p>
+                    <div class="mod-footer">
+                        <span class="mod-price">مجاناً</span>
+                        <a href="#" class="btn-download" target="_blank">تحميل</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Ravine Store Craft. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        function addNewMod() {
+            const title = document.getElementById('modTitle').value;
+            const price = document.getElementById('modPrice').value;
+            const img = document.getElementById('modImg').value;
+            const link = document.getElementById('modLink').value;
+            const desc = document.getElementById('modDesc').value;
+
+            if(!title || !price) {
+                alert('المرجو إدخال اسم المود والسعر على الأقل!');
+                return;
+            }
+
+            const container = document.getElementById('modsContainer');
+            const card = document.createElement('div');
+            card.className = 'mod-card';
+            card.innerHTML = `
+                <img src="${img || 'https://images.unsplash.com/photo-1627856013091-feddeac5b425?w=500&auto=format&fit=crop&q=60'}" alt="Mod">
+                <div class="mod-content">
+                    <h3 class="mod-title">${title}</h3>
+                    <p class="mod-desc">${desc || 'لا يوجد وصف متاح لهذا المود.'}</p>
+                    <div class="mod-footer">
+                        <span class="mod-price">${price}</span>
+                        <a href="${link || '#'}" class="btn-download" target="_blank">تحميل</a>
+                    </div>
+                </div>
+            `;
+            container.prepend(card);
+
+            document.getElementById('modTitle').value = '';
+            document.getElementById('modPrice').value = '';
+            document.getElementById('modImg').value = '';
+            document.getElementById('modLink').value = '';
+            document.getElementById('modDesc').value = '';
+            
+            alert('تم نشر المود بنجاح في المتجر!');
+        }
+    </script>
+</body>
+              </html>
